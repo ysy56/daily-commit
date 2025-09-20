@@ -1,0 +1,24 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # 매일 09:00 UTC 실행 (한국 시간 18:00쯤)
+  workflow_dispatch:       # 수동 실행도 가능
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make a change
+        run: |
+          echo "Updated at $(date -u)" > daily_commit.txt
+
+      - name: Commit & Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add daily_commit.txt
+          git commit -m "chore: daily commit" || echo "No changes to commit"
+          git push
