@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}   # ✅ 토큰 전달
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Make a change
         run: |
@@ -22,8 +22,8 @@ jobs:
 
       - name: Commit & Push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "ysy56"   # ← 본인 GitHub 닉네임
+          git config user.email "ysy561356@naver.com"            # ← GitHub 계정에 등록된 이메일
           git add daily_commit.txt
           git commit -m "chore: daily commit" || echo "No changes to commit"
           git push
